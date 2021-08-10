@@ -1,0 +1,40 @@
+//
+// Protocol buffers definition
+//
+syntax = "proto3";
+package pt.tecnico.rec.grpc;
+
+message PingRequest  {
+	string input = 1;
+}
+
+message PingResponse {
+	string output = 1;
+}
+
+message ReadRequest {
+	string key = 1;
+}
+
+message ReadResponse {
+	string value = 1;
+	int32 sequence = 2;
+	string clientId = 3;
+}
+
+message WriteRequest {
+	string key = 1;
+	string value = 2;
+	int32 sequence = 3;
+	string clientId = 4;
+}
+
+message WriteResponse {
+	// empty
+}
+
+service RecordService {
+	rpc Ping(PingRequest) returns (PingResponse);
+	rpc Read(ReadRequest) returns (ReadResponse);
+	rpc Write(WriteRequest) returns (WriteResponse);
+}
